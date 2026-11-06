@@ -16,11 +16,18 @@ export default function WordRow({ word, onEdit, onDelete }) {
           <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{word.definition}</p>
         ) : null}
         {word.synonyms?.length || word.antonyms?.length ? (
-          <p className="mt-1 font-mono text-[11px] leading-relaxed text-muted-foreground/80">
-            {word.synonyms?.length ? <span>+ {word.synonyms.join(", ")}</span> : null}
-            {word.synonyms?.length && word.antonyms?.length ? <span className="px-2">·</span> : null}
-            {word.antonyms?.length ? <span>− {word.antonyms.join(", ")}</span> : null}
-          </p>
+          <div className="mt-1 grid gap-0.5 font-mono text-[11px] leading-relaxed text-muted-foreground/80">
+            {word.synonyms?.length ? (
+              <span>
+                <span className="text-muted-foreground">synonym:</span> {word.synonyms.join(", ")}
+              </span>
+            ) : null}
+            {word.antonyms?.length ? (
+              <span>
+                <span className="text-muted-foreground">antonym:</span> {word.antonyms.join(", ")}
+              </span>
+            ) : null}
+          </div>
         ) : null}
       </div>
 
