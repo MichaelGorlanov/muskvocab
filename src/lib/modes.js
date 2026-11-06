@@ -1,11 +1,4 @@
-import {
-  ArrowLeftRight,
-  BookOpen,
-  Equal,
-  Keyboard,
-  Shuffle,
-  Sprout,
-} from "lucide-react";
+import { ArrowLeftRight, BookOpen, Equal, Keyboard, Shuffle } from "lucide-react";
 
 export const MODES = [
   {
@@ -37,12 +30,6 @@ export const MODES = [
     label: "Mixed",
     blurb: "Every word, every question type.",
     icon: Shuffle,
-  },
-  {
-    key: "roots",
-    label: "Roots",
-    blurb: "Link each root to a word built on it.",
-    icon: Sprout,
   },
 ];
 

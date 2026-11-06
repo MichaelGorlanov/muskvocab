@@ -16,7 +16,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Practice antonyms, synonyms, definitions, spelling, roots and mixed review — one question at a time.",
+          "Practice antonyms, synonyms, definitions, spelling and mixed review — one question at a time.",
       },
     ],
     // No icon link: the platform adds the app's logo when serving.

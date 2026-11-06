@@ -26,7 +26,7 @@ export default function HeroSection({ units = [], totalWords = 0 }) {
           </h1>
 
           <p className="hs-rise max-w-xl text-[15px] leading-relaxed text-[#26473C] [animation-delay:120ms] sm:text-base">
-            Antonyms, synonyms, definitions, spelling, roots and mixed review.
+            Antonyms, synonyms, definitions, spelling and mixed review.
             Every word in your list gets its own question, and a wrong answer
             waits for you to try again.
           </p>

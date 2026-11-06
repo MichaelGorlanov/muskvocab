@@ -11,12 +11,6 @@ export default function WordRow({ word, onEdit, onDelete }) {
               {word.partOfSpeech}
             </span>
           ) : null}
-          {word.root ? (
-            <span className="rounded-full bg-accent/60 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-primary">
-              {word.root}
-              {word.rootMeaning ? ` · ${word.rootMeaning}` : ""}
-            </span>
-          ) : null}
         </div>
         {word.definition ? (
           <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{word.definition}</p>

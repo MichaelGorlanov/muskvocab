@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Practice antonyms, synonyms, definitions, spelling, roots and mixed review — one question at a time.",
+          "Practice antonyms, synonyms, definitions, spelling and mixed review — one question at a time.",
       },
     ],
   }),
@@ -73,7 +73,7 @@ function HomePage() {
               Step 2 — pick your drill
             </p>
             <h2 className="mt-3 max-w-xl font-display text-[clamp(2rem,4vw,2.9rem)] leading-[1.08] tracking-tight text-foreground">
-              Six ways to lock the words in
+              Five ways to lock the words in
             </h2>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">

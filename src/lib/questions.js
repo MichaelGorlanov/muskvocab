@@ -128,45 +128,11 @@ function spellingQuestion(word) {
   };
 }
 
-function rootGroups(all) {
-  const groups = new Map();
-  all.forEach((word) => {
-    const root = clean(word.root).toLowerCase();
-    if (!root || !clean(word.term)) return;
-    if (!groups.has(root)) {
-      groups.set(root, {
-        root: clean(word.root),
-        meaning: clean(word.rootMeaning),
-        words: [],
-      });
-    }
-    groups.get(root).words.push(word);
-  });
-  return Array.from(groups.values());
-}
-
-function rootQuestion(group, all) {
-  const answerWord = pick(group.words);
-  const others = all
-    .filter((w) => clean(w.root).toLowerCase() !== group.root.toLowerCase())
-    .map((w) => clean(w.term));
-  return choiceQuestion({
-    tag: "Roots",
-    prompt: group.meaning ? `${group.root} — ${group.meaning}` : group.root,
-    sub: "Which word is built on this root?",
-    answer: clean(answerWord.term),
-    pool: others,
-    banned: new Set(group.words.map((w) => clean(w.term))),
-    word: clean(answerWord.term),
-  });
-}
-
 const BUILDERS = {
   synonyms: (words) => words.map((w) => synonymQuestion(w, words)),
   antonyms: (words) => words.map((w) => antonymQuestion(w, words)),
   definitions: (words) => words.map((w) => definitionQuestion(w, words)),
   spelling: (words) => words.map((w) => spellingQuestion(w)),
-  roots: (words) => rootGroups(words).map((g) => rootQuestion(g, words)),
   mixed: (words) =>
     words.map((word) => {
       const kinds = [definitionQuestion, spellingQuestion];
@@ -193,8 +159,6 @@ export function countQuestion(words, mode) {
       return words.filter((w) => clean(w.term) && clean(w.definition)).length;
     case "spelling":
       return words.filter((w) => clean(w.term)).length;
-    case "roots":
-      return rootGroups(words).length;
     case "mixed":
     default:
       return words.filter((w) => clean(w.term)).length;

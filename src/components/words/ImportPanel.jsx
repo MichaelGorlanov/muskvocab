@@ -45,7 +45,7 @@ export default function ImportPanel({ open, onOpenChange, defaultUnit, units, on
           <DialogTitle className="font-display text-2xl font-normal">Paste your list</DialogTitle>
           <DialogDescription>
             One word per line, columns separated by a pipe or a tab: word | definition | synonyms |
-            antonyms | root | root meaning. Anything after the word is optional.
+            antonyms. Anything after the word is optional.
           </DialogDescription>
         </DialogHeader>
 

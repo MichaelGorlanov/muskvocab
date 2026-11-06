@@ -18,8 +18,6 @@ const wordData = z.object({
   definition: z.string().trim().max(500).optional().default(""),
   synonyms: z.array(z.string().trim().min(1).max(60)).max(40).optional().default([]),
   antonyms: z.array(z.string().trim().min(1).max(60)).max(40).optional().default([]),
-  root: z.string().trim().max(60).optional().default(""),
-  rootMeaning: z.string().trim().max(120).optional().default(""),
 });
 
 export const saveWord = createServerFn({ method: "POST" })

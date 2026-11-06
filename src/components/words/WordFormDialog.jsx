@@ -20,8 +20,6 @@ const EMPTY = {
   definition: "",
   synonyms: "",
   antonyms: "",
-  root: "",
-  rootMeaning: "",
 };
 
 export default function WordFormDialog({ open, onOpenChange, initial, defaultUnit, units, onSaved }) {
@@ -41,8 +39,6 @@ export default function WordFormDialog({ open, onOpenChange, initial, defaultUni
             definition: initial.definition || "",
             synonyms: (initial.synonyms || []).join(", "),
             antonyms: (initial.antonyms || []).join(", "),
-            root: initial.root || "",
-            rootMeaning: initial.rootMeaning || "",
           }
         : EMPTY
     );
@@ -74,8 +70,6 @@ export default function WordFormDialog({ open, onOpenChange, initial, defaultUni
         definition: form.definition,
         synonyms: form.synonyms.split(/[,;]/).map((s) => s.trim()).filter(Boolean),
         antonyms: form.antonyms.split(/[,;]/).map((s) => s.trim()).filter(Boolean),
-        root: form.root,
-        rootMeaning: form.rootMeaning,
       },
     });
   };
@@ -152,22 +146,6 @@ export default function WordFormDialog({ open, onOpenChange, initial, defaultUni
                 value={form.antonyms}
                 onChange={set("antonyms")}
                 placeholder="cruel, spiteful"
-              />
-            </div>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="grid gap-1.5">
-              <Label htmlFor="word-root">Root</Label>
-              <Input id="word-root" value={form.root} onChange={set("root")} placeholder="bene" />
-            </div>
-            <div className="grid gap-1.5">
-              <Label htmlFor="word-root-meaning">Root meaning</Label>
-              <Input
-                id="word-root-meaning"
-                value={form.rootMeaning}
-                onChange={set("rootMeaning")}
-                placeholder="good"
               />
             </div>
           </div>
