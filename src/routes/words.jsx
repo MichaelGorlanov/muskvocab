@@ -9,8 +9,7 @@ import ImportPanel from "@/components/words/ImportPanel";
 import { listWords, deleteWord, deleteUnit } from "@/lib/server-fns";
 import { unitsOf } from "@/lib/questions";
 
-export const Route = createFileRoute("/_authed/words")({
-  ssr: false,
+export const Route = createFileRoute("/words")({
   loader: async () => ({ words: await listWords() }),
   component: WordBankPage,
   head: () => ({
@@ -172,7 +171,7 @@ function WordBankPage() {
         open={formOpen}
         onOpenChange={setFormOpen}
         initial={editing}
-        defaultUnit={grouped[0]?.unit || "Unit 1"}
+        defaultUnit={grouped[0]?.unit || "Lesson 1"}
         units={units}
         onSaved={refresh}
       />
@@ -180,7 +179,7 @@ function WordBankPage() {
       <ImportPanel
         open={importOpen}
         onOpenChange={setImportOpen}
-        defaultUnit={grouped[grouped.length - 1]?.unit || "Unit 1"}
+        defaultUnit={grouped[grouped.length - 1]?.unit || "Lesson 1"}
         units={units}
         onSaved={refresh}
       />
