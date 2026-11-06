@@ -16,6 +16,7 @@ import { saveWord } from "@/lib/server-fns";
 
 const EMPTY = {
   term: "",
+  partOfSpeech: "",
   definition: "",
   synonyms: "",
   antonyms: "",
@@ -24,18 +25,19 @@ const EMPTY = {
 };
 
 export default function WordFormDialog({ open, onOpenChange, initial, defaultUnit, units, onSaved }) {
-  const [unit, setUnit] = useState(defaultUnit || "Unit 1");
+  const [unit, setUnit] = useState(defaultUnit || "Lesson 1");
   const [form, setForm] = useState(EMPTY);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!open) return;
     setError(null);
-    setUnit(initial?.unit || defaultUnit || "Unit 1");
+    setUnit(initial?.unit || defaultUnit || "Lesson 1");
     setForm(
       initial
         ? {
             term: initial.term || "",
+            partOfSpeech: initial.partOfSpeech || "",
             definition: initial.definition || "",
             synonyms: (initial.synonyms || []).join(", "),
             antonyms: (initial.antonyms || []).join(", "),
@@ -68,6 +70,7 @@ export default function WordFormDialog({ open, onOpenChange, initial, defaultUni
       unit: unit.trim(),
       word: {
         term: form.term,
+        partOfSpeech: form.partOfSpeech,
         definition: form.definition,
         synonyms: form.synonyms.split(/[,;]/).map((s) => s.trim()).filter(Boolean),
         antonyms: form.antonyms.split(/[,;]/).map((s) => s.trim()).filter(Boolean),
@@ -90,10 +93,19 @@ export default function WordFormDialog({ open, onOpenChange, initial, defaultUni
         </DialogHeader>
 
         <form onSubmit={submit} className="mt-2 grid gap-4">
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-3">
             <div className="grid gap-1.5">
               <Label htmlFor="word-term">Word</Label>
               <Input id="word-term" value={form.term} onChange={set("term")} placeholder="benevolent" />
+            </div>
+            <div className="grid gap-1.5">
+              <Label htmlFor="word-pos">Part of speech</Label>
+              <Input
+                id="word-pos"
+                value={form.partOfSpeech}
+                onChange={set("partOfSpeech")}
+                placeholder="adj."
+              />
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="word-unit">Unit</Label>
@@ -101,7 +113,7 @@ export default function WordFormDialog({ open, onOpenChange, initial, defaultUni
                 id="word-unit"
                 value={unit}
                 onChange={(event) => setUnit(event.target.value)}
-                placeholder="Unit 1"
+                placeholder="Lesson 5"
                 list="word-units"
               />
               <datalist id="word-units">

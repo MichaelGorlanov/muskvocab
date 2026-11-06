@@ -6,6 +6,11 @@ export default function WordRow({ word, onEdit, onDelete }) {
       <div className="min-w-0">
         <div className="flex flex-wrap items-baseline gap-2">
           <span className="font-display text-lg text-foreground">{word.term}</span>
+          {word.partOfSpeech ? (
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+              {word.partOfSpeech}
+            </span>
+          ) : null}
           {word.root ? (
             <span className="rounded-full bg-accent/60 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-primary">
               {word.root}

@@ -204,3 +204,26 @@ export function countQuestion(words, mode) {
 export function unitsOf(words) {
   return Array.from(new Set((words || []).map((w) => clean(w.unit)).filter(Boolean)));
 }
+
+// A selection of lessons travels as one search param joined by "|".
+export function unitsParam(names) {
+  return Array.from(new Set((names || []).filter(Boolean))).join("|");
+}
+
+export function unitsLabel(param) {
+  return String(param || "")
+    .split("|")
+    .map((name) => name.trim())
+    .filter(Boolean)
+    .join(" · ");
+}
+
+export function scopeWords(words, param) {
+  const all = words || [];
+  const names = String(param || "")
+    .split("|")
+    .map((name) => name.trim())
+    .filter(Boolean);
+  if (!names.length) return all;
+  return all.filter((word) => names.includes(clean(word.unit)));
+}

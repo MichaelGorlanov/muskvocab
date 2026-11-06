@@ -16,14 +16,14 @@ import { importWords } from "@/lib/server-fns";
 import { parseWordBlock, SAMPLE_IMPORT } from "@/lib/parseWords";
 
 export default function ImportPanel({ open, onOpenChange, defaultUnit, units, onSaved }) {
-  const [unit, setUnit] = useState(defaultUnit || "Unit 1");
+  const [unit, setUnit] = useState(defaultUnit || "Lesson 1");
   const [text, setText] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!open) return;
     setError(null);
-    setUnit(defaultUnit || "Unit 1");
+    setUnit(defaultUnit || "Lesson 1");
     setText("");
   }, [open, defaultUnit]);
 
@@ -57,7 +57,7 @@ export default function ImportPanel({ open, onOpenChange, defaultUnit, units, on
               value={unit}
               onChange={(event) => setUnit(event.target.value)}
               list="import-units"
-              placeholder="Unit 1"
+              placeholder="Lesson 5"
             />
             <datalist id="import-units">
               {units.map((u) => (

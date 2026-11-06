@@ -1,6 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireUser } from "@/lib/auth-middleware";
 
 export const getServerInfo = createServerFn({ method: "GET" }).handler(async () => ({
   renderedAt: new Date().toISOString(),
@@ -15,6 +14,7 @@ export const listWords = createServerFn({ method: "GET" }).handler(async ({ cont
 
 const wordData = z.object({
   term: z.string().trim().min(1).max(80),
+  partOfSpeech: z.string().trim().max(20).optional().default(""),
   definition: z.string().trim().max(500).optional().default(""),
   synonyms: z.array(z.string().trim().min(1).max(60)).max(40).optional().default([]),
   antonyms: z.array(z.string().trim().min(1).max(60)).max(40).optional().default([]),
@@ -23,7 +23,6 @@ const wordData = z.object({
 });
 
 export const saveWord = createServerFn({ method: "POST" })
-  .middleware([requireUser])
   .validator(
     z.object({
       id: z.string().min(1).optional(),
@@ -39,7 +38,6 @@ export const saveWord = createServerFn({ method: "POST" })
   });
 
 export const importWords = createServerFn({ method: "POST" })
-  .middleware([requireUser])
   .validator(
     z.object({
       unit: z.string().trim().min(1).max(60),
@@ -53,7 +51,6 @@ export const importWords = createServerFn({ method: "POST" })
   });
 
 export const deleteWord = createServerFn({ method: "POST" })
-  .middleware([requireUser])
   .validator(z.object({ id: z.string().min(1) }))
   .handler(async ({ data, context }) => {
     await context.getBase44().entities.VocabWord.delete(data.id);
@@ -61,7 +58,6 @@ export const deleteWord = createServerFn({ method: "POST" })
   });
 
 export const deleteUnit = createServerFn({ method: "POST" })
-  .middleware([requireUser])
   .validator(z.object({ unit: z.string().trim().min(1).max(60) }))
   .handler(async ({ data, context }) => {
     await context.getBase44().entities.VocabWord.deleteMany({ unit: data.unit });

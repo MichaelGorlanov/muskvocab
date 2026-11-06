@@ -7,7 +7,7 @@ import TypeQuestion from "@/components/practice/TypeQuestion";
 import Feedback from "@/components/practice/Feedback";
 import ResultsPanel from "@/components/practice/ResultsPanel";
 import { useQuiz } from "@/hooks/useQuiz";
-import { buildQuestions } from "@/lib/questions";
+import { buildQuestions, scopeWords, unitsLabel } from "@/lib/questions";
 import { getMode } from "@/lib/modes";
 import { listWords } from "@/lib/server-fns";
 
@@ -29,10 +29,7 @@ function PracticePage() {
 
   const { words: allWords } = Route.useLoaderData();
 
-  const words = useMemo(
-    () => (unit ? allWords.filter((w) => w.unit === unit) : allWords),
-    [allWords, unit]
-  );
+  const words = useMemo(() => scopeWords(allWords, unit), [allWords, unit]);
 
   const [questions, setQuestions] = useState(null);
 
@@ -55,7 +52,8 @@ function PracticePage() {
           <div className="mx-auto w-full max-w-2xl rounded-2xl border border-border/80 bg-card p-10 text-center">
             <h2 className="font-display text-2xl">Nothing to ask yet</h2>
             <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
-              There are no words with the right details for this mode{unit ? ` in ${unit}` : ""}.
+              There are no words with the right details for this mode
+              {unit ? ` in ${unitsLabel(unit)}` : ""}.
             </p>
             <Link
               to="/"
@@ -67,7 +65,7 @@ function PracticePage() {
         ) : quiz.done ? (
           <ResultsPanel
             modeLabel={modeMeta.label}
-            unit={unit}
+            unit={unitsLabel(unit)}
             total={quiz.total}
             firstTry={quiz.firstTry}
             missed={quiz.missed}
@@ -77,7 +75,7 @@ function PracticePage() {
           <>
             <QuizHeader
               modeLabel={modeMeta.label}
-              unit={unit}
+              unit={unitsLabel(unit)}
               index={quiz.index}
               total={quiz.total}
             />

@@ -17,6 +17,9 @@ export default function SiteHeader() {
           <Link to="/" className="transition-colors hover:text-[#E8F4B8] [&.active]:text-[#E8F4B8]">
             Practice
           </Link>
+          <Link to="/flashcards" className="transition-colors hover:text-[#E8F4B8] [&.active]:text-[#E8F4B8]">
+            Flashcards
+          </Link>
           <Link to="/words" className="transition-colors hover:text-[#E8F4B8] [&.active]:text-[#E8F4B8]">
             Word bank
           </Link>
