@@ -83,15 +83,15 @@ function HomePage() {
 
         {words.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border bg-card p-10 text-center">
-            <h3 className="font-display text-2xl">Your word bank is empty</h3>
+            <h3 className="font-display text-2xl">The word bank is empty</h3>
             <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Paste your vocabulary list and every mode below fills up with questions.
+              The word lists haven't been added yet — once they are, every mode below fills up.
             </p>
             <Link
               to="/words"
               className="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground"
             >
-              Add my words
+              View the word bank
             </Link>
           </div>
         ) : (

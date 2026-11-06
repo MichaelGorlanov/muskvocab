@@ -31,14 +31,6 @@
         "type": "string"
       },
       "description": "Words that mean the opposite"
-    },
-    "root": {
-      "type": "string",
-      "description": "Greek or Latin root, e.g. bene"
-    },
-    "rootMeaning": {
-      "type": "string",
-      "description": "What the root means, e.g. good"
     }
   },
   "required": [
@@ -47,8 +39,20 @@
   ],
   "rls": {
     "read": {},
-    "create": {},
-    "update": {},
-    "delete": {}
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
