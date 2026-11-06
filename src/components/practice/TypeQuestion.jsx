@@ -22,8 +22,6 @@ export default function TypeQuestion({ question, status, onPick }) {
       }}
       className="grid gap-4"
     >
-      <p className="font-mono text-sm tracking-[0.3em] text-muted-foreground">{question.hint}</p>
-
       <div className="relative">
         <input
           ref={inputRef}

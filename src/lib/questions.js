@@ -120,9 +120,9 @@ function spellingQuestion(word) {
   return {
     tag: "Spelling",
     kind: "type",
-    prompt: clean(word.definition) || `Spell the word "${term}".`,
-    sub: `Type the word. ${term.length} letters, first letter shown below.`,
-    hint: maskedHint(term),
+    prompt: clean(word.definition) || "Spell the word that fits.",
+    sub: "Type the word that matches this definition.",
+    hint: "",
     answer: term,
     word: term,
   };
