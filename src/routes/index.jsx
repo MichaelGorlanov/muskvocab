@@ -77,7 +77,7 @@ function HomePage() {
             </h2>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Each mode asks one question per word in your selection, so nothing gets skipped.
+            The synonym drill covers every listed synonym. Other modes cover each word with the required details.
           </p>
         </div>
 

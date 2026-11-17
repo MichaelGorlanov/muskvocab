@@ -10,7 +10,7 @@ export const MODES = [
   {
     key: "synonyms",
     label: "Synonyms",
-    blurb: "Pick the word that means the same thing.",
+    blurb: "Practice every listed synonym, one question at a time.",
     icon: Equal,
   },
   {

@@ -1,5 +1,5 @@
-// Pure question-building helpers. Every mode creates exactly one question per
-// item it covers, so the number of problems always matches the word bank size.
+// Pure question-building helpers. Synonym drills cover every listed synonym;
+// other modes create one question per eligible vocabulary word.
 
 const clean = (value) => String(value ?? "").trim();
 
@@ -56,10 +56,10 @@ function choiceQuestion({ tag, prompt, sub, answer, pool, banned, word, extra })
   return { tag, kind: "choice", prompt, sub, answer, options, word };
 }
 
-function synonymQuestion(word, all) {
+function synonymQuestion(word, all, fixedAnswer) {
   const own = listOf(word.synonyms);
   if (!own.length || !clean(word.term)) return null;
-  const answer = pick(own);
+  const answer = fixedAnswer ?? pick(own);
   const banned = new Set([...own, ...listOf(word.antonyms)]);
   const pool = all.flatMap((w) => [...listOf(w.synonyms), ...listOf(w.antonyms)]);
   return choiceQuestion({
@@ -129,7 +129,10 @@ function spellingQuestion(word) {
 }
 
 const BUILDERS = {
-  synonyms: (words) => words.map((w) => synonymQuestion(w, words)),
+  synonyms: (words) =>
+    words.flatMap((word) =>
+      listOf(word.synonyms).map((answer) => synonymQuestion(word, words, answer))
+    ),
   antonyms: (words) => words.map((w) => antonymQuestion(w, words)),
   definitions: (words) => words.map((w) => definitionQuestion(w, words)),
   spelling: (words) => words.map((w) => spellingQuestion(w)),
@@ -152,7 +155,10 @@ export function countQuestion(words, mode) {
   if (!Array.isArray(words) || !words.length) return 0;
   switch (mode) {
     case "synonyms":
-      return words.filter((w) => listOf(w.synonyms).length).length;
+      return words.reduce(
+        (total, word) => total + (clean(word.term) ? listOf(word.synonyms).length : 0),
+        0
+      );
     case "antonyms":
       return words.filter((w) => listOf(w.antonyms).length).length;
     case "definitions":
